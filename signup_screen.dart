@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:first_flutter_project/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +20,12 @@ class _SignupScreenState extends State<SignupScreen> {
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Sign Up"),
+        title: Text(context.tr('sign_up')),
       ),
       body: Column(
         children: [
-          // i want to make form here 
+          // i want to make form here
+
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
@@ -43,7 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: "Name",
+                    labelText: tr("name"),
                     hintText: "Enter your name"
                   ),
                 ),
@@ -60,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: "Email",
+                    labelText: tr("email"),
                     hintText: "Enter your email"
                   ),
                 ),
@@ -77,7 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: tr("password"),
                     hintText: "Enter your password"
                   ),
                 ),
@@ -94,7 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: "Confirm Password",
+                    labelText: tr("confirm_password"),
                     hintText: "Enter your password again"
                   ),
                 ),
@@ -105,7 +107,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   } else {
                     _showErrorSnackBar();
                   }
-                }, child: Text("Sign Up"))
+                }, child: Text(tr("sign_up")))
+                ,
+                ElevatedButton(onPressed: (){
+                  if(context.locale.toString() == "en_US"){
+                    context.setLocale(Locale('ar', 'EG'));
+                  } else {
+                    context.setLocale(Locale('en', 'US'));
+                  }
+                  print(context.locale.toString());
+                }, child: Text("Change Language"))
               ],
             )),
           )
@@ -143,7 +154,7 @@ class _SignupScreenState extends State<SignupScreen> {
             onPressed: () {
               Navigator.pop(context); // Close the dialog
               _navigateToShoppingScreen();
-              
+
             },
             child: Text('Close'),
           ),
