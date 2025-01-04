@@ -114,6 +114,24 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   void _showSuccessDialog() {
     showDialog(
       context: context,
@@ -125,6 +143,7 @@ class _SignupScreenState extends State<SignupScreen> {
             onPressed: () {
               Navigator.pop(context); // Close the dialog
               _navigateToShoppingScreen();
+              
             },
             child: Text('Close'),
           ),
@@ -134,10 +153,8 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _navigateToShoppingScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
+    Navigator.push(context, _createRoute());
+
   }
 
   void _showErrorSnackBar() {
