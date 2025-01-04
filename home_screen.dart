@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,11 +14,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Shopify"),
+        title: Text(tr("shopify")),
+        actions: [
+          // change language icon
+          IconButton(icon: Icon(Icons.language), onPressed: (){
+            // change language
+            if(context.locale == Locale('en', 'US')){
+              context.setLocale(Locale('ar', 'EG'));
+            }else{
+              context.setLocale(Locale('en', 'US'));
+            }
+          })
+        ],
       ),
       body: Column(
         children: [
-          Align(alignment: Alignment.center,child: Text("our products",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
+          Align(alignment: Alignment.center,child: Text(tr("our_products"),style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
           SizedBox(height: 20,),
           Container(
             height: 250,
@@ -72,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(height: 20,),
-          Text("hot offers",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+          Text(tr("hot_offers"),style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
           SizedBox(height: 5,),
           Expanded(
             child: ListView.builder(
